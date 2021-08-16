@@ -110,16 +110,12 @@ class lcl_app implementation.
             r_salv_table   = r_alv
           changing
             t_table        = gt_alv ).
-
-*       STATUS_GUI:
-        r_alv->set_screen_status(
-          pfstatus      =  'STATUS_1'
-          report        =  sy-repid
-          set_functions = r_alv->c_functions_all ).
-
       catch cx_salv_msg.
 
     endtry.
+
+    data(r_functions) = r_alv->get_functions( ).
+    r_functions->set_all( abap_true ).
 
 *   Seleção das linhas:
     r_selections = r_alv->get_selections( ).
